@@ -1,6 +1,6 @@
 ---
 name: booking-guide
-description: Use when the user wants to book, cancel, or check UCSD study room reservations. Trigger on "study room", "방 예약", "예약 취소", "스터디룸", "Price Center", or any room booking intent.
+description: Use when the user wants to book, cancel, or check UCSD study room reservations. Trigger on "study room", "방 예약", "예약 취소", "스터디룸", "예약 조" "Price Center", or any room booking intent.
 ---
 
 # UCSD Study Room Booking Guide
@@ -29,8 +29,12 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 3. Reason MUST be one of: Bad Weather, Changed Date, Changed Location, Lack of Funding, Lack of Interest, Lack of Resources, Lack of Time to Plan, Other
 4. Call `cancel_reservation` with date, reason, and optionally room_name
 
+## Important Rules
+
+- **Search has no time limit** — `search_rooms` can query any time range. Do NOT split searches into 4-hour chunks.
+- **Booking has a 4-hour max** — `book_room` is limited to 4 hours per reservation per day. If the user wants more than 4 hours, split into multiple bookings.
+
 ## Error Handling
 
 - If a tool returns "Session expired", call `login` first, then retry
 - Rooms are Price Center Study Room 1 through 8
-- Maximum 4 hours per booking per day
