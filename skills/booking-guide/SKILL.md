@@ -12,7 +12,7 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 - `search_rooms(date, start_time, end_time)` — Search available rooms
 - `book_room(date, start_time, end_time, room_name)` — Book a specific room
 - `my_events()` — List current reservations
-- `cancel_reservation(date, reason, room_name?)` — Cancel a reservation
+- `cancel_reservation(reason, reservation_id?, date?, room_name?)` — Cancel a reservation (pass `reservation_id`, or a `YYYY-MM-DD` date)
 - `login(username, password)` — Authenticate (UCSD SSO + Duo Push, runs headlessly — no browser window)
 
 ## Booking Flow
@@ -27,7 +27,8 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 1. Call `my_events` to show current reservations
 2. Ask the user which reservation to cancel and why
 3. Reason MUST be one of: Bad Weather, Changed Date, Changed Location, Lack of Funding, Lack of Interest, Lack of Resources, Lack of Time to Plan, Other
-4. Call `cancel_reservation` with date, reason, and optionally room_name
+4. Call `cancel_reservation` with the selected reservation's `reservation_id` (from `my_events`) and reason
+5. If it returns multiple matches (`needs_selection`), ask the user which one and call again with that `reservation_id`. Never guess between them
 
 ## Important Rules
 
