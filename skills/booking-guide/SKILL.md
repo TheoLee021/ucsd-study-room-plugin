@@ -13,7 +13,7 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 - `book_room(date, start_time, end_time, room_name)` — Book a specific room
 - `my_events()` — List current reservations
 - `cancel_reservation(date, reason, room_name?)` — Cancel a reservation
-- `login(username, password)` — Authenticate (UCSD SSO + Duo Push)
+- `login(username, password)` — Authenticate (UCSD SSO + Duo Push, runs headlessly — no browser window)
 
 ## Booking Flow
 
@@ -37,4 +37,6 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 ## Error Handling
 
 - If a tool returns "Session expired", call `login` first, then retry
+- **Before calling `login`**, tell the user that login is starting: it runs in the background with no window and can take up to 90 seconds, and they need to approve the Duo Push on their phone. Without this message the user sees nothing while waiting.
+- If `login` fails with "SSO login failed: ...", show the user the reason as-is; do not retry with the same credentials
 - Rooms are Price Center Study Room 1 through 8
