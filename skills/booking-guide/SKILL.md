@@ -33,7 +33,8 @@ You have access to MCP tools for managing UCSD Price Center Study Room reservati
 ## Important Rules
 
 - **Search has no time limit** — `search_rooms` can query any time range. Do NOT split searches into 4-hour chunks.
-- **Booking has a 4-hour max** — `book_room` is limited to 4 hours per reservation per day. If the user wants more than 4 hours, split into multiple bookings.
+- **One reservation per day, 4 hours max** — EMS allows only one booking per day, up to 4 hours. Do NOT split longer requests into multiple bookings; the second one will be blocked. Offer a single booking of up to 4 hours instead.
+- **Free but not bookable** — if the user already has a booking that day, `search_rooms` lists free rooms as "Free but not bookable" with the existing booking. Tell the user they must cancel or change that booking first; don't try other rooms.
 
 ## Error Handling
 
